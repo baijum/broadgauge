@@ -86,7 +86,12 @@
     {% if workshop.status == 'pending' %}
       {{render_interested_trainers()}}
     {% elif workshop.status == 'confirmed' %}
-      <h3>Trainer</h3>
+
+      <h3>Trainer
+	{% if user and user.is_admin() %}
+	<a class="small" href="/workshops/{{workshop.id}}/set-trainer">Set Trainer</a>
+	{% endif %}
+      </h3>
       {{render_trainer(workshop.get_trainer())}}
     {% endif %}
 
